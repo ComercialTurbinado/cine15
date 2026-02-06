@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Obrigado por solicitar sua reserva - Cine15">
+    <title>Obrigado - CINE15</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .obrigado-section { min-height: 70vh; display: flex; align-items: center; justify-content: center; padding: var(--spacing-xl) var(--spacing-sm); }
+        .obrigado-box { background: var(--bg-glass); backdrop-filter: var(--glass-blur); border: 1px solid var(--glass-border); border-radius: 16px; padding: var(--spacing-lg); max-width: 520px; width: 100%; text-align: center; }
+        .obrigado-title { font-family: var(--font-heading); font-size: clamp(1.75rem, 4vw, 2.25rem); color: var(--text-primary); margin-bottom: var(--spacing-sm); }
+        .obrigado-text { color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.6; }
+        .btn-whatsapp { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; background: #25D366; color: #fff; padding: 1rem 1.75rem; border-radius: 12px; font-weight: 600; text-decoration: none; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; border: none; cursor: pointer; }
+        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4); color: #fff; }
+        .btn-voltar { display: inline-block; margin-top: var(--spacing-md); color: var(--text-secondary); text-decoration: none; font-size: 0.95rem; }
+        .btn-voltar:hover { color: var(--accent-gold); }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo" style="text-decoration: none; color: inherit;">CINE15</a>
+                <a href="index.html" class="btn-nav">VOLTAR AO SITE</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="obrigado-section">
+        <div class="obrigado-box">
+            <h1 class="obrigado-title">Obrigado!</h1>
+            <p class="obrigado-text">
+                Sua solicitação de reserva foi recebida. Em breve entraremos em contato pelo WhatsApp para confirmar a disponibilidade na sua data.
+            </p>
+            <p class="obrigado-text" style="font-size: 0.95rem;">
+                Quer falar agora? Clique no botão abaixo para abrir o WhatsApp.
+            </p>
+            <a id="btnWhatsapp" href="#" class="btn-whatsapp" target="_blank" rel="noopener">
+                Falar agora no WhatsApp
+            </a>
+            <br>
+            <a href="index.html" class="btn-voltar">← Voltar para a página inicial</a>
+        </div>
+    </section>
+
+    <script>
+        (function() {
+            var WHATSAPP_NUMBER = '5511982195839'; // Substitua pelo número real (DDI + DDD + número, sem espaços)
+            var data = null;
+            try {
+                var raw = sessionStorage.getItem('cine15_formData');
+                if (raw) data = JSON.parse(raw);
+            } catch (e) {}
+            
+            function formatDate(dateString) {
+                if (!dateString) return '';
+                var d = new Date(dateString);
+                var day = String(d.getDate()).padStart(2, '0');
+                var month = String(d.getMonth() + 1).padStart(2, '0');
+                var year = d.getFullYear();
+                return day + '/' + month + '/' + year;
+            }
+            function getTemaLabel(v) {
+                var map = { 'classico': 'Clássico', 'balada': 'Balada', 'jardim': 'Jardim', 'outro': 'Outro' };
+                return map[v] || v || '';
+            }
+            function getPacoteLabel(v) {
+                var map = { 'silver': 'Silver', 'gold': 'Gold', 'diamond': 'Diamond' };
+                return map[v] || v || '';
+            }
+            
+            var msg = 'Olá! Acabei de solicitar minha reserva pelo site. Seguem os dados:\n\n';
+            if (data) {
+                msg += 'Nome: ' + (data.nome || '') + '\n';
+                msg += 'WhatsApp: ' + (data.whatsapp || '') + '\n';
+                msg += 'Data da Festa: ' + formatDate(data.dataFesta) + '\n';
+                msg += 'Tema: ' + getTemaLabel(data.tema) + '\n';
+                msg += 'Pacote: ' + getPacoteLabel(data.pacote);
+            } else {
+                msg += '(Dados do formulário não disponíveis nesta sessão.)';
+            }
+            
+            var link = document.getElementById('btnWhatsapp');
+            link.href = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(msg);
+        })();
+    </script>
+</body>
+</html>

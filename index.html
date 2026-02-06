@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transforme os 15 anos da sua filha em uma produção cinematográfica exclusiva com Inteligência Artificial.">
+    <title>CINE15 - Sua história merece cinema.</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">CINE15</div>
+                <button class="btn-nav" onclick="scrollToForm()">RESERVAR DATA</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section: Hero -->
+    <section class="hero">
+        <div class="hero-video-container">
+            <video id="heroVideo1" class="hero-video" autoplay muted playsinline></video>
+            <video id="heroVideo2" class="hero-video hero-video-hidden" muted playsinline></video>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-headline">
+                    Não é apenas um convite.<br>
+                    É a estreia do filme dela.
+                </h1>
+                <h2 class="hero-subheadline">
+                    Transformamos os 15 anos da sua filha em uma produção cinematográfica exclusiva com Inteligência Artificial. O primeiro passo para uma noite inesquecível.
+                </h2>
+                <div class="hero-cta">
+                    <button class="btn-primary" onclick="scrollToForm()">QUERO ENTRAR NA LISTA DE ESPERA</button>
+                    <p class="microcopy">Agenda de Produção atual: Últimas 3 vagas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Emotional Hook -->
+    <section class="emotional-hook">
+        <div class="container">
+            <h3 class="section-heading">A festa dura apenas 5 horas.<br>O filme dura para sempre.</h3>
+            <div class="hook-content">
+                <p class="hook-text">
+                    Você está planejando cada detalhe há meses. O vestido, o buffet, a decoração. Mas quando as luzes se apagam, o que fica?<br><br>
+                    A <strong>Cine15</strong> une arte e tecnologia para criar um registro eterno da juventude da sua filha. Não entregamos um vídeo simples; entregamos uma <strong>experiência de Hollywood</strong> onde ela é a protagonista absoluta.
+                </p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4>Roteiro Exclusivo</h4>
+                        <p>Criamos narrativas mágicas baseadas no tema da festa.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Direção de Arte Digital</h4>
+                        <p>Cenários que seriam impossíveis no mundo real.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4>Ultra-Realismo</h4>
+                        <p>Tecnologia de IA que preserva a identidade e a beleza dela.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Portfolio / Showcase -->
+    <section class="portfolio">
+        <div class="container">
+            <h2 class="section-heading">Escolha o Universo Dela</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-card" data-video="video1">
+                    <div class="portfolio-thumbnail" style="background-image: url('portifolio/Menina-1.jpg');">
+                        <div class="play-overlay" >
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>O Conto de Fadas</h3>
+                    <p>Castelos, magia e realeza. (Estilo Bridgerton/Disney)</p>
+                </div>
+                <div class="portfolio-card" data-video="video2">
+                    <div class="portfolio-thumbnail" style="background-image: url('portifolio/Menina-3_1.jpg');">
+                        <div class="play-overlay">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>A Balada Neon</h3>
+                    <p>Cores vibrantes, estética Euphoria e energia urbana.</p>
+                </div>
+                <div class="portfolio-card" data-video="video3">
+                    <div class="portfolio-thumbnail" style="background-image: url('portifolio/menina-4_4.jpg');">
+                        <div class="play-overlay">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                        </div>
+                    </div>
+                    <h3>Mundo Encantado</h3>
+                    <p>Florestas mágicas e natureza lúdica.</p>
+                </div>
+                 
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Section: Pricing & Packages -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-heading">Selecione a Experiência</h2>
+            <div class="pricing-grid">
+                <!-- Pacote Silver -->
+                <div class="package-card">
+                    <h3 class="package-title">PACOTE SILVER</h3>
+                    <p class="package-subtitle">A Entrada no Tapete Vermelho</p>
+                    <ul class="package-features">
+                        <li>Produção "Save The Date" Cinematográfico (30s)</li>
+                        <li>Formato Vertical (Perfeito para Reels/TikTok)</li>
+                        <li>Roteiro Personalizado (Tema à escolha)</li>
+                        <li>Trilha Sonora Licenciada</li>
+                    </ul>
+                    <div class="package-price">R$ 697,00</div>
+                    <button class="btn-package" onclick="scrollToForm()">Entrar na Fila de Espera</button>
+                </div>
+
+                <!-- Pacote Gold -->
+                <div class="package-card package-gold">
+                    <h3 class="package-title">PACOTE GOLD</h3>
+                    <p class="package-subtitle">O Hype do Instagram</p>
+                    <ul class="package-features">
+                        <li>Produção "Save The Date" (30s)</li>
+                        <li>+ Kit Stories (Contagem Regressiva)</li>
+                        <li>Edição Premium</li>
+                    </ul>
+                    <div class="package-price">R$ 997,00</div>
+                    <button class="btn-package" onclick="scrollToForm()">Entrar na Fila de Espera</button>
+                </div>
+
+                <!-- Pacote Diamond -->
+                <div class="package-card package-diamond">
+                    <div class="diamond-badge">💎</div>
+                    <h3 class="package-title">PACOTE DIAMOND</h3>
+                    <p class="package-subtitle">A Experiência Visual Completa</p>
+                    <ul class="package-features">
+                        <li><strong>Tudo do Pacote Silver</strong></li>
+                        <li><strong>+ Backdrop Infinito:</strong> Vídeo em loop (2min) para rodar nos <strong>Telões de LED</strong> durante a festa. (Decoração Digital).</li>
+                        <li><strong>+ Kit Stories:</strong> 3 Vídeos de Contagem Regressiva (Faltam 3 dias, 2 dias, É Hoje).</li>
+                        <li><strong>+ Arte Fine-Art 8K:</strong> Arquivo em ultra-resolução para impressão de Quadros ou Banners gigantes.</li>
+                        <li><strong>Prioridade na Edição</strong></li>
+                    </ul>
+                    <div class="package-price">R$ 1.997,00</div>
+                    <button class="btn-package btn-diamond" onclick="scrollToForm()">APLICAR PARA VAGA DIAMOND</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Scarcity & Authority -->
+    <section class="scarcity">
+        <div class="container">
+            <h2 class="section-heading">Por que trabalhamos com Lista de Espera?</h2>
+            <div class="scarcity-content">
+                <p class="scarcity-text">
+                    Diferente de aplicativos automáticos, cada produção da <strong>Cine15</strong> passa pela mão de diretores de arte digitais. Cuidamos de cada detalhe, da iluminação do rosto ao movimento do vestido.<br><br>
+                    Para manter esse padrão de excelência ("Quality Cinema"), limitamos nossa produção a <strong>apenas 20 debutantes por mês</strong> em todo o Brasil.
+                </p>
+                <div class="warning-box">
+                    <p>⚠️ As vagas para entrega imediata são extremamente limitadas. Preencha o formulário para verificar disponibilidade na sua data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Application Form -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <h2 class="section-heading">Solicite sua Reserva</h2>
+            <form class="application-form" id="reservationForm">
+                <div class="form-group">
+                    <label for="nome">Seu Nome (Mãe/Responsável)</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="whatsapp">Seu WhatsApp</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dataFesta">Data da Festa</label>
+                    <input type="date" id="dataFesta" name="dataFesta" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tema">Tema da Festa</label>
+                    <select id="tema" name="tema" required>
+                        <option value="">Selecione um tema</option>
+                        <option value="classico">Clássico</option>
+                        <option value="balada">Balada</option>
+                        <option value="jardim">Jardim</option>
+                        <option value="outro">Outro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pacote">Qual pacote te interessou?</label>
+                    <select id="pacote" name="pacote" required>
+                        <option value="">Selecione um pacote</option>
+                        <option value="diamond">Diamond (Recomendado)</option>
+                        <option value="gold">Gold</option>
+                        <option value="silver">Silver</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-submit">VERIFICAR DISPONIBILIDADE AGORA</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <p class="footer-copyright">Cine15 Studios © 2026</p>
+                    <p class="footer-tagline">"Sua história merece cinema."</p>
+                </div>
+                <div class="footer-social">
+                    <a href="#" class="social-link" aria-label="Instagram">Instagram</a>
+                    <a href="#" class="social-link" aria-label="WhatsApp">WhatsApp Direto</a>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Política de Privacidade</a>
+                    <span class="separator">|</span>
+                    <a href="#" class="footer-link">Termos de Uso</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

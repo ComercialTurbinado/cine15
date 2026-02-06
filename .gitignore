@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Vídeo fonte (muito grande para o Git; os chunks em video/ você pode enviar ou hostear em outro lugar)
+meu_video.mp4
+
+# Opcional: descomente se os chunks de vídeo forem grandes e você hostear em CDN
+# video/*.mp4
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
