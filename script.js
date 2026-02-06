@@ -632,15 +632,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ============================================
-    // PORTFOLIO - Modal de Vídeo em Tela Cheia (Criado Dinamicamente)
+    // PORTFOLIO - Modal de Vídeo Local (sem download)
     // ============================================
-    const portfolioCards = document.querySelectorAll('.portfolio-card');
+    const portfolioGrid = document.querySelector('.portfolio-grid');
+    const videoSources = {
+        video1: 'portifolio/Menina-1.webm',
+        video2: 'portifolio/Menina-3_1.webm',
+        video3: 'portifolio/menina-4_4.webm'
+    };
     let videoModal = null;
     let modalVideo = null;
 
-    // Função para criar o modal dinamicamente
     function createVideoModal() {
-        // Criar o elemento do modal
         const modal = document.createElement('div');
         modal.className = 'video-popup-modal';
         modal.id = 'videoPopupModal';
@@ -654,98 +657,61 @@ document.addEventListener('DOMContentLoaded', function() {
                     </svg>
                 </button>
                 <div class="video-popup-player">
-                    <video controls preload="none">
-                        <!-- O vídeo será carregado apenas quando o modal abrir -->
+                    <video controls preload="none" controlsList="nodownload" disablePictureInPicture disableRemotePlayback playsinline>
                     </video>
                 </div>
             </div>
         `;
-        
-        // Inserir no final do body
         document.body.appendChild(modal);
-        
-        // Obter referências aos elementos
+
         const video = modal.querySelector('video');
         const closeBtn = modal.querySelector('.video-popup-close');
         const overlay = modal.querySelector('.video-popup-overlay');
-        
-        // Event listeners
+
         closeBtn.addEventListener('click', () => closeVideoModal());
         overlay.addEventListener('click', () => closeVideoModal());
-        
-        // Prevenir fechamento ao clicar no vídeo
-        video.addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-        
-        // Fechar com ESC
+        video.addEventListener('click', (e) => e.stopPropagation());
+        video.addEventListener('contextmenu', (e) => e.preventDefault());
+
         const escHandler = (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                closeVideoModal();
-            }
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeVideoModal();
         };
         document.addEventListener('keydown', escHandler);
         modal._escHandler = escHandler;
-        
+
         return { modal, video };
     }
 
-    // Função para abrir o modal e carregar vídeo sob demanda
     function openVideoModal(videoSrc) {
-        // Criar modal se não existir
+        if (!videoSrc) return;
         if (!videoModal) {
             const elements = createVideoModal();
             videoModal = elements.modal;
             modalVideo = elements.video;
         }
-
-        // Prevenir scroll da página
         document.body.style.overflow = 'hidden';
-        
-        // Mostrar o modal
         videoModal.classList.add('active');
-        
-        // Aguardar um frame antes de carregar o vídeo
         requestAnimationFrame(() => {
             modalVideo.src = videoSrc;
             modalVideo.load();
-            
-            // Reproduzir quando estiver pronto
-            const playWhenReady = () => {
-                modalVideo.play().catch(error => {
-                    console.warn('Erro ao reproduzir vídeo:', error);
-                });
-            };
-            
-            if (modalVideo.readyState >= 2) {
-                playWhenReady();
-            } else {
-                modalVideo.addEventListener('loadeddata', playWhenReady, { once: true });
-            }
+            const playWhenReady = () => modalVideo.play().catch(() => {});
+            if (modalVideo.readyState >= 2) playWhenReady();
+            else modalVideo.addEventListener('loadeddata', playWhenReady, { once: true });
         });
     }
 
-    // Função para fechar o modal e liberar recursos
     function closeVideoModal() {
         if (!videoModal || !modalVideo) return;
-
-        // Pausar e limpar o vídeo
         modalVideo.pause();
         modalVideo.currentTime = 0;
         modalVideo.src = '';
         modalVideo.load();
-        
-        // Fechar o modal
         videoModal.classList.remove('active');
         document.body.style.overflow = '';
-        
-        // Remover listener ESC
         if (videoModal._escHandler) {
             document.removeEventListener('keydown', videoModal._escHandler);
             delete videoModal._escHandler;
         }
-        
-        // Remover o modal do DOM após animação
         setTimeout(() => {
             if (videoModal && !videoModal.classList.contains('active')) {
                 videoModal.remove();
@@ -755,76 +721,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300);
     }
 
-    // Carregar lista de vídeos do portfólio dinamicamente
-    let videoSources = {};
-    let portfolioVideos = [];
-
-    // Função para carregar a lista de vídeos do JSON
-    async function loadPortfolioVideos() {
-        try {
-            const response = await fetch('portfolio-videos.json');
-            if (!response.ok) {
-                throw new Error('Arquivo portfolio-videos.json não encontrado. Execute: node generate-portfolio-list.js');
-            }
-            
-            const data = await response.json();
-            portfolioVideos = data.videos || [];
-            
-            // Criar objeto de mapeamento
-            portfolioVideos.forEach(video => {
-                videoSources[video.id] = video.path;
-            });
-            
-            console.log(`✅ ${portfolioVideos.length} vídeo(s) do portfólio carregado(s)`);
-            
-            // Atualizar os cards se necessário
-            updatePortfolioCards();
-            
-        } catch (error) {
-            console.warn('⚠️  Erro ao carregar lista de vídeos:', error.message);
-            console.warn('💡 Execute: node generate-portfolio-list.js para gerar o arquivo JSON');
-            // Usar fallback se o JSON não existir
-            videoSources = {
-                'video1': 'portifolio/Menina-1.webm',
-                'video2': 'portifolio/Menina-3_1.webm',
-                'video3': 'portifolio/menina-4_4.webm'
-            };
-        }
-    }
-
-    // Função para atualizar os cards do portfólio com os vídeos carregados
-    function updatePortfolioCards() {
-        portfolioCards.forEach((card, index) => {
-            const videoId = `video${index + 1}`;
-            card.setAttribute('data-video', videoId);
-            
-            // Se houver dados do vídeo, atualizar título se necessário
-            if (portfolioVideos[index]) {
-                const videoName = portfolioVideos[index].name;
-                const titleElement = card.querySelector('h3');
-                if (titleElement && !titleElement.textContent.trim()) {
-                    titleElement.textContent = videoName;
-                }
-            }
-        });
-    }
-
-    // Carregar vídeos ao inicializar
-    loadPortfolioVideos();
-
-    // Event listeners para cada card
-    portfolioCards.forEach(card => {
-        card.addEventListener('click', () => {
+    if (portfolioGrid) {
+        portfolioGrid.addEventListener('click', function(e) {
+            const card = e.target.closest('.portfolio-card');
+            if (!card) return;
             const videoId = card.getAttribute('data-video');
-            const videoSrc = videoSources[videoId] || '';
-            
-            if (videoSrc) {
-                openVideoModal(videoSrc);
-            } else {
-                console.warn('Vídeo não encontrado para:', videoId);
-                alert('Vídeo não encontrado. Verifique se o arquivo portfolio-videos.json foi gerado corretamente.');
-            }
+            const videoSrc = videoSources[videoId];
+            if (videoSrc) openVideoModal(videoSrc);
         });
-    });
+    }
 });
 

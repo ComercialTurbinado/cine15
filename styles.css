@@ -140,6 +140,14 @@ h3 {
     font-weight: 600;
     letter-spacing: 0.2em;
     color: var(--text-primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.logo img {
+    height: 2rem;
+    width: auto;
+    display: block;
 }
 
 .btn-nav {
@@ -617,6 +625,9 @@ h3 {
     z-index: 100000 !important;
     pointer-events: none;
 }
+.video-popup-content .video-popup-player {
+    pointer-events: all;
+}
 
 .video-popup-close {
     position: fixed;
@@ -654,10 +665,13 @@ h3 {
     pointer-events: all;
 }
 
-.video-popup-player video {
+.video-popup-player video,
+.video-popup-player iframe {
     width: 100%;
-    height: auto;
+    height: calc(100vh - 4rem);
     max-height: calc(100vh - 4rem);
+    min-height: 320px;
+    border: none;
     border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
     display: block;
