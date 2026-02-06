@@ -56,6 +56,20 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.boxShadow = 'none';
         }
     });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var item = this.closest('.faq-item');
+            var isOpen = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('active'); });
+            document.querySelectorAll('.faq-question').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+            if (!isOpen) {
+                item.classList.add('active');
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
 });
 
 // URL do Google Apps Script (Web App) - Substitua pela URL após publicar o script
