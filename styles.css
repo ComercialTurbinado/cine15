@@ -1043,6 +1043,10 @@ h3 {
     text-decoration: underline;
 }
 
+.social-link.is-hidden {
+    display: none;
+}
+
 .footer-links {
     display: flex;
     gap: var(--spacing-xs);

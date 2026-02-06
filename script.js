@@ -636,9 +636,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     const portfolioGrid = document.querySelector('.portfolio-grid');
     const videoSources = {
-        video1: 'portifolio/Menina-1.webm',
-        video2: 'portifolio/Menina-3_1.webm',
-        video3: 'portifolio/menina-4_4.webm'
+        video1: 'portifolio/ConviteLuiza-Alice-cine15anos.webm',
+        video2: 'portifolio/ConviteJulia-Magia-Cine15Anos.webm',
+        video3: 'portifolio/ConviteValentina-princesa-cine15anos.webm'
     };
     let videoModal = null;
     let modalVideo = null;
